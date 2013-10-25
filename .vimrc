@@ -1,14 +1,14 @@
 " x-------------------------------------x
-" | GAGES VIMRC				|
+" | GAGES VIMRC                         |
 " x-------------------------------------x
 " This makes sure that it doesn't defalt to all the crappy vi stuff rather
 " than use all the new vim stuff
-set nocompatible
-
 
 ""======== VUNDLES mannagement ===================
 set nocompatible               " be iMproved
- filetype off                   " required!
+filetype off                   " required!
+
+:let g:javascript_conceal=1
 
  set rtp+=~/.vim/bundle/vundle/
  call vundle#rc()
@@ -22,44 +22,53 @@ Bundle 'The-NERD-tree'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
+"Bundle 'tpope/vim-rails.git'
 Bundle 'Syntastic'
 Bundle 'surround.vim'
 Bundle 'mru.vim'
-Bundle 'L9'
+"Bundle 'L9'
 Bundle 'ctrlp.vim'
-Bundle 'FuzzyFinder'
 Bundle 'matchit.zip'
 Bundle 'abolish.vim'
 Bundle 'tComment'
 Bundle 'elzr/vim-json'
 Bundle 'delimitMate.vim'
 Bundle 'joonty/vim-sauce.git'
-Bundle 'terryma/vim-multiple-cursors'   
-Bundle 'bling/vim-airline'             
-
+Bundle 'terryma/vim-multiple-cursors'
+Bundle 'bling/vim-airline'
+Bundle 'xsbeats/vim-blade'
+Bundle 'goatslacker/mango.vim'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'godlygeek/tabular'
 Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle 'plasticboy/vim-markdown'
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
 Bundle 'vim-snippets'
-Bundle 'pangloss/vim-javascript'
+"Bundle 'jelera/vim-javascript-syntax'
+Bundle "pangloss/vim-javascript"
 Bundle 'jQuery'
-Bundle 'tomasr/molokai'
+Bundle "Chiel92/vim-autoformat"
+Bundle "einars/js-beautify"
 
 Bundle 'flazz/vim-colorschemes'
-Bundle 'twe4ked/vim-colorscheme-switcher'
+Bundle 'xolox/vim-colorscheme-switcher'
+Bundle 'xolox/vim-misc'
+
+Bundle 'Lokaltog/vim-distinguished'
 
 " git repos on your local machine (ie. when working on your own plugin)
 " Bundle 'file:///Users/gmarik/path/to/plugin'
 " ...
+
+noremap <c-l> :Autoformat<CR><CR>
  
 " makes it so I can match tags with % sign
 :runtime macros/matchit.vim 
  
 :let g:sparkupNextMapping=',N'
 
-:colo molokai
-:SetColors all
+:colo Monokai
 
 filetype plugin indent on     
  "required!
@@ -79,6 +88,8 @@ filetype plugin indent on
 
 
 runtime ftplugin/man.vim
+
+:cd ~/Desktop/gages/
 
 
 set ruler " puts a bar on the bottom with info
@@ -110,7 +121,7 @@ nmap <S-Insert> "+p
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "adds a new command that edits your vimrc via :Vimrc
-com! Vimrc :e $HOME/.vimrc
+com! Vimrc :e ~/.vim/vimrc/.vimrc
 map ,v ;vsplit<cr>
 map ,s ;split<cr>
 map ,q ;q<cr>
@@ -153,7 +164,6 @@ nmap <C-k> kkkkk
 " set autochdir	  
 
 " helps things to indent properly
-
 set smartindent
 set tabstop=4
 set shiftwidth=4
@@ -273,7 +283,6 @@ let g:multi_cursor_quit_key='<Esc>'
 inoremap jj <Esc>:w<CR>
 inoremap ;; <End>;<Esc>:w<CR>
 nnoremap ; :
-nnoremap : ;
 
 "This makes moving around in wrapped lines better
 map j gj
@@ -285,4 +294,16 @@ inoremap {<cr> {<cr>}<c-o><s-o>
 inoremap [<cr> [<cr>]<c-o><s-o>
 inoremap (<cr> (<cr>)<c-o><s-o>
 
+inoremap ;w<cr> <esc>:w<cr>
+inoremap :w<cr> <esc>:w<cr>
+
+
 com! ReloadSnippets :call ReloadAllSnippets()
+
+
+
+" See invisible characters
+"set list
+set listchars=eol:¶,tab:>-,trail:•,extends:>,precedes:<
+
+
