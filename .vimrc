@@ -17,44 +17,70 @@ filetype off                   " required!
 " required! 
 Bundle 'gmarik/vundle'
 
-" My Bundles here:
+" My Bundles here:--------------------------
+                                        " does it even need an intro?
 Bundle 'The-NERD-tree'
+                                        " git wrapper
 Bundle 'tpope/vim-fugitive'
+                                        " easer moving around (don't use very much)
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-"Bundle 'tpope/vim-rails.git'
+                                        " Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+                                        " better way to make HTML fast
+Bundle 'mattn/emmet-vim'
+                                        " Tells me when I have an error in my code
 Bundle 'Syntastic'
+                                        " easy surounding of things
 Bundle 'surround.vim'
+                                        " Most recent files
 Bundle 'mru.vim'
-"Bundle 'L9'
+                                        " IDK...
+                                        " Bundle 'L9'
+                                        " Easy file / buffer finding
 Bundle 'ctrlp.vim'
+                                        " HTML matching (doesn't seem to work
 Bundle 'matchit.zip'
+                                        " Better replacements
 Bundle 'abolish.vim'
+                                        " Easy way to comment out lines
 Bundle 'tComment'
+                                        " JSON syntax highlighting
 Bundle 'elzr/vim-json'
+                                        " Match parenthesis
 Bundle 'delimitMate.vim'
+                                        " Project mannagement
 Bundle 'joonty/vim-sauce.git'
+                                        " multiple cursors like sublime
 Bundle 'terryma/vim-multiple-cursors'
+                                        " Cool status line
 Bundle 'bling/vim-airline'
+                                        " syntax highlighting for laravel's blade templating
 Bundle 'xsbeats/vim-blade'
+                                        " Cool colorscheme for javascript
 Bundle 'goatslacker/mango.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
+                                        " way of lining up these comments all nice
 Bundle 'godlygeek/tabular'
-Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle 'MarcWeber/vim-addon-mw-utils'
+                                        " markdown highlighting
 Bundle 'plasticboy/vim-markdown'
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle 'vim-snippets'
-"Bundle 'jelera/vim-javascript-syntax'
-Bundle "pangloss/vim-javascript"
+                                        " awesome new way to do snippets
+Bundle 'SirVer/ultisnips'
+                                        " javscript highlight
+Bundle 'pangloss/vim-javascript'
+                                        " Jquery syntax
 Bundle 'jQuery'
-Bundle "Chiel92/vim-autoformat"
-Bundle "einars/js-beautify"
+                                        " Use ctrl-l to format my code
+Bundle 'Chiel92/vim-autoformat'
+                                        " format my javascript using the above plugin
+Bundle 'einars/js-beautify'
 
+                                        " colorschemes for vim
 Bundle 'flazz/vim-colorschemes'
+                                        " easy way to switch them (buggy)
 Bundle 'xolox/vim-colorscheme-switcher'
+                                        " required for above
 Bundle 'xolox/vim-misc'
 
+                                        " cool colo
 Bundle 'Lokaltog/vim-distinguished'
 
 " git repos on your local machine (ie. when working on your own plugin)
@@ -305,5 +331,17 @@ com! ReloadSnippets :call ReloadAllSnippets()
 " See invisible characters
 "set list
 set listchars=eol:¶,tab:>-,trail:•,extends:>,precedes:<
+
+
+" EMMET settings
+let g:user_emmet_mode='a'    "enable all function in all mode.
+
+let g:user_emmet_install_global = 0
+
+autocmd FileType html,css,php,blade EmmetInstall
+
+map <c-e> <c-y>
+map <leader>e <c-y>
+map <leader>y <c-y>
 
 
