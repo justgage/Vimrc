@@ -345,3 +345,8 @@ map <leader>e <c-y>
 map <leader>y <c-y>
 
 
+" this will make <tab> move forward with UltiSnips instead of <c-j/k>
+" old habits die hard
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
