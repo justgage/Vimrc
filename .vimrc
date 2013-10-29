@@ -350,3 +350,10 @@ map <leader>y <c-y>
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+"auto change current directory to the current file
+autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
+
+"manually change the current directory to the current file an print it out.
+nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+
