@@ -46,7 +46,7 @@ Bundle 'tComment'
                                         " JSON syntax highlighting
 Bundle 'elzr/vim-json'
                                         " Match parenthesis
-Bundle 'delimitMate.vim'
+"Bundle 'delimitMate.vim'
                                         " Project mannagement
 Bundle 'joonty/vim-sauce.git'
                                         " multiple cursors like sublime
@@ -82,6 +82,9 @@ Bundle 'xolox/vim-misc'
 
                                         " cool colo
 Bundle 'Lokaltog/vim-distinguished'
+
+Bundle 'markwu/vim-laravel4-snippets'
+                                        "laravel snippets
 
 " git repos on your local machine (ie. when working on your own plugin)
 " Bundle 'file:///Users/gmarik/path/to/plugin'
@@ -352,8 +355,10 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 "auto change current directory to the current file
-autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
+"autocmd BufEnter * if expand("%:p:h") !~ '^/tmp' | silent! lcd %:p:h | endif
 
 "manually change the current directory to the current file an print it out.
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
+
+noremap K k
 
