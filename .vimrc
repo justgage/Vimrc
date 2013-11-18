@@ -85,6 +85,8 @@ Bundle 'Lokaltog/vim-distinguished'
 
 Bundle 'markwu/vim-laravel4-snippets'
                                         "laravel snippets
+Bundle 'Shutnik/jshint2.vim'
+                                        "laravel snippets
 
 " git repos on your local machine (ie. when working on your own plugin)
 " Bundle 'file:///Users/gmarik/path/to/plugin'
@@ -182,11 +184,6 @@ nmap <C-k> kkkkk
  nmap <Right> <C-w>l 
  nmap <Up> <C-w>k 
  nmap <Down> <C-w>j 
-
-
-" some mappings to find files FAST!
-" this one was for buffers but it's not so useful
-" map <C-b> :FuzzyFinderBuffer <CR>
 
 " This sets the CD to the current file, pretty nice
 " actualy but I like a little more control
@@ -343,7 +340,8 @@ let g:user_emmet_install_global = 0
 
 autocmd FileType html,css,php,blade EmmetInstall
 
-map <c-e> <c-y>
+imap <D-e> <c-y>,
+imap <C-e> <c-y>,
 map <leader>e <c-y>
 map <leader>y <c-y>
 
@@ -362,3 +360,6 @@ nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
 noremap K k
 
+" map these keys to easy motion commands
+map f <leader><leader>f
+map F <leader><leader>F
