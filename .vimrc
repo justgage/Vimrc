@@ -4,11 +4,11 @@
 " This makes sure that it doesn't defalt to all the crappy vi stuff rather
 " than use all the new vim stuff
 
+
 ""======== VUNDLES mannagement ===================
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-:let g:javascript_conceal=1
 
  set rtp+=~/.vim/bundle/vundle/
  call vundle#rc()
@@ -18,75 +18,40 @@ filetype off                   " required!
 Bundle 'gmarik/vundle'
 
 " My Bundles here:--------------------------
-                                        " does it even need an intro?
 Bundle 'The-NERD-tree'
-                                        " git wrapper
 Bundle 'tpope/vim-fugitive'
-                                        " easer moving around (don't use very much)
 Bundle 'Lokaltog/vim-easymotion'
-                                        " Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-                                        " better way to make HTML fast
 Bundle 'mattn/emmet-vim'
-                                        " Tells me when I have an error in my code
 Bundle 'Syntastic'
-                                        " easy surounding of things
 Bundle 'surround.vim'
-                                        " Most recent files
 Bundle 'mru.vim'
-                                        " IDK...
-                                        " Bundle 'L9'
-                                        " Easy file / buffer finding
 Bundle 'ctrlp.vim'
-                                        " HTML matching (doesn't seem to work
 Bundle 'matchit.zip'
-                                        " Better replacements
 Bundle 'abolish.vim'
-                                        " Easy way to comment out lines
 Bundle 'tComment'
-                                        " JSON syntax highlighting
 Bundle 'elzr/vim-json'
-                                        " Match parenthesis
-"Bundle 'delimitMate.vim'
-                                        " Project mannagement
 Bundle 'joonty/vim-sauce.git'
-                                        " multiple cursors like sublime
 Bundle 'terryma/vim-multiple-cursors'
-                                        " Cool status line
 Bundle 'bling/vim-airline'
-                                        " syntax highlighting for laravel's blade templating
 Bundle 'xsbeats/vim-blade'
-                                        " Cool colorscheme for javascript
 Bundle 'goatslacker/mango.vim'
-                                        " way of lining up these comments all nice
 Bundle 'godlygeek/tabular'
 Bundle 'MarcWeber/vim-addon-mw-utils'
-                                        " markdown highlighting
 Bundle 'plasticboy/vim-markdown'
-                                        " awesome new way to do snippets
 Bundle 'SirVer/ultisnips'
-                                        " javscript highlight
 Bundle 'pangloss/vim-javascript'
-                                        " Jquery syntax
 Bundle 'jQuery'
-                                        " Use ctrl-l to format my code
 Bundle 'Chiel92/vim-autoformat'
-                                        " format my javascript using the above plugin
 Bundle 'einars/js-beautify'
-
-                                        " colorschemes for vim
 Bundle 'flazz/vim-colorschemes'
-                                        " easy way to switch them (buggy)
 Bundle 'xolox/vim-colorscheme-switcher'
-                                        " required for above
 Bundle 'xolox/vim-misc'
-
-                                        " cool colo
 Bundle 'Lokaltog/vim-distinguished'
-
 Bundle 'markwu/vim-laravel4-snippets'
-                                        "laravel snippets
 Bundle 'Shutnik/jshint2.vim'
-                                        "laravel snippets
+Bundle 'groenewege/vim-less'
+Bundle 'skammer/vim-css-color'
+Bundle 'dxw/vim-php-indent'
 
 " git repos on your local machine (ie. when working on your own plugin)
 " Bundle 'file:///Users/gmarik/path/to/plugin'
@@ -99,7 +64,7 @@ noremap <c-l> :Autoformat<CR><CR>
  
 :let g:sparkupNextMapping=',N'
 
-:colo Monokai
+:colo slate
 
 filetype plugin indent on     
  "required!
@@ -115,13 +80,9 @@ filetype plugin indent on
 
 
  "========== end of vundle mannagement ===========
- 
 
 
 runtime ftplugin/man.vim
-
-:cd ~/Desktop/gages/
-
 
 set ruler " puts a bar on the bottom with info
 
@@ -153,10 +114,15 @@ inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "adds a new command that edits your vimrc via :Vimrc
 com! Vimrc :e ~/.vim/vimrc/.vimrc
-map ,v ;vsplit<cr>
-map ,s ;split<cr>
-map ,q ;q<cr>
-map ,w ;w<cr>
+map ,v :vsplit<cr>
+map ,s :split<cr>
+map ,V :Vimrc<cr>
+map ,S :so ~/.vimrc<cr>
+map ,q :q<cr>
+map ,w :w<cr>
+map ,i :BundleInstall<cr>
+map ,c :BundleClean<cr>
+
 
 "I always make the typo of typing :W
 "This is my lazy way of not fixing
@@ -166,7 +132,7 @@ com! W :w
 " If you have the NERDtree plugin installed
 " then this opens that with f2
 " (really useful)
-nmap <c-n> ;NERDTreeToggle<CR>
+nmap <C-n> ;NERDTreeToggle<CR>
 " This opens MRU which is a plugin
 " for showing most recent files edited
 " nmap <F3> :MRU<CR>
@@ -361,5 +327,8 @@ nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 noremap K k
 
 " map these keys to easy motion commands
-map f <leader><leader>f
-map F <leader><leader>F
+map <leader>f <leader><leader>f
+map <leader>F <leader><leader>F
+
+com! TrailingSpaceKiller :%s/\s\+$//e<cr>
+
