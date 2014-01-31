@@ -4,7 +4,6 @@
 " This makes sure that it doesn't defalt to all the crappy vi stuff rather
 " than use all the new vim stuff
 
-
 ""======== VUNDLES mannagement ===================
 set nocompatible               " be iMproved
 filetype off                   " required!
@@ -18,40 +17,45 @@ filetype off                   " required!
 Bundle 'gmarik/vundle'
 
 " My Bundles here:--------------------------
-Bundle 'The-NERD-tree'
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'mattn/emmet-vim'
+"Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'jQuery'
+"Bundle 'terryma/vim-multiple-cursors'
+Bundle 'Chiel92/vim-autoformat'
+Bundle 'Lokaltog/vim-distinguished'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'Shutnik/jshint2.vim'
+Bundle 'SirVer/ultisnips'
 Bundle 'Syntastic'
-Bundle 'surround.vim'
-Bundle 'mru.vim'
-Bundle 'ctrlp.vim'
-Bundle 'matchit.zip'
+Bundle 'The-NERD-tree'
 Bundle 'abolish.vim'
-Bundle 'tComment'
-Bundle 'elzr/vim-json'
-Bundle 'joonty/vim-sauce.git'
-Bundle 'terryma/vim-multiple-cursors'
 Bundle 'bling/vim-airline'
-Bundle 'xsbeats/vim-blade'
+Bundle 'ctrlp.vim'
+Bundle 'cwoac/nvim'
+Bundle 'dxw/vim-php-indent'
+Bundle 'einars/js-beautify'
+Bundle 'elzr/vim-json'
+Bundle 'flazz/vim-colorschemes'
 Bundle 'goatslacker/mango.vim'
 Bundle 'godlygeek/tabular'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'SirVer/ultisnips'
+Bundle 'groenewege/vim-less'
+Bundle 'joonty/vim-sauce.git'
+Bundle 'lukaszkorecki/workflowish'
+Bundle 'markwu/vim-laravel4-snippets'
+Bundle 'matchit.zip'
+Bundle 'mattn/emmet-vim'
+Bundle 'mru.vim'
 Bundle 'pangloss/vim-javascript'
-Bundle 'jQuery'
-Bundle 'Chiel92/vim-autoformat'
-Bundle 'einars/js-beautify'
-Bundle 'flazz/vim-colorschemes'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'skammer/vim-css-color'
+Bundle 'surround.vim'
+Bundle 'tComment'
+Bundle 'tpope/vim-fugitive'
+Bundle 'vim-scripts/vim-auto-save'
 Bundle 'xolox/vim-colorscheme-switcher'
 Bundle 'xolox/vim-misc'
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'markwu/vim-laravel4-snippets'
-Bundle 'Shutnik/jshint2.vim'
-Bundle 'groenewege/vim-less'
-Bundle 'skammer/vim-css-color'
-Bundle 'dxw/vim-php-indent'
+Bundle 'xsbeats/vim-blade'
+
+"Bundle 'vim-scripts/YankRing.vim'
 
 " git repos on your local machine (ie. when working on your own plugin)
 " Bundle 'file:///Users/gmarik/path/to/plugin'
@@ -64,7 +68,7 @@ noremap <c-l> :Autoformat<CR><CR>
  
 :let g:sparkupNextMapping=',N'
 
-:colo slate
+colo 256-grayvim
 
 filetype plugin indent on     
  "required!
@@ -113,15 +117,15 @@ nmap <S-Insert> "+p
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "adds a new command that edits your vimrc via :Vimrc
-com! Vimrc :e ~/.vim/vimrc/.vimrc
+com! Vimrc :e ~/Vimrc/.vimrc
 map ,v :vsplit<cr>
 map ,s :split<cr>
 map ,V :Vimrc<cr>
 map ,S :so ~/.vimrc<cr>
 map ,q :q<cr>
 map ,w :w<cr>
-map ,i :BundleInstall<cr>
-map ,c :BundleClean<cr>
+map ,i ,S:BundleInstall<cr>
+map ,c ,S:BundleClean<cr>
 
 
 "I always make the typo of typing :W
@@ -198,6 +202,9 @@ au BufRead,BufNewFile *.js set ft=javascript.jquery
    " --- Some special settings for .txt files
 au BufRead,BufNewFile *.txt setlocal wrap linebreak
 au BufRead,BufNewFile *.txt setlocal syntax=txt
+
+au BufRead,BufNewFile *.wofl setlocal syntax=workflowish
+au BufRead,BufNewFile *.wofl call workflowish#convert_from_workflowy()
    " --- This Fixes the indents automaticly for all PHP files
 " au FileType php silent normal gg=G
    " --- This Turns cursor collmons on and off when you lave a buffer
@@ -330,5 +337,26 @@ noremap K k
 map <leader>f <leader><leader>f
 map <leader>F <leader><leader>F
 
-com! TrailingSpaceKiller :%s/\s\+$//e<cr>
+com! TrailingSpaceKiller :%s/\s\+$//
 
+"set syntax highlighting ON
+
+:syntax on
+
+" normal copy/paste
+vmap <C-c> y<Esc>i
+vmap <C-x> d<Esc>i
+imap <C-v> <Esc>pi
+imap <C-y> <Esc>ddi
+map <C-z> <Esc>
+imap <C-z> <Esc>ui
+
+com! R !clear;echo "-----------[ errors ]-----------"; g++ %; echo""; echo "-----------[ a.out ]-----------";./a.out
+map ,r :R<cr>
+
+imap <c-s> <c-o>:w<cr>
+
+
+
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
