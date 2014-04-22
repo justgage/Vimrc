@@ -13,14 +13,14 @@ filetype off                   " required!
  call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " My Bundles here:--------------------------
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'jQuery'
 "Bundle 'terryma/vim-multiple-cursors'
-Bundle 'Chiel92/vim-autoformat'
+"Bundle 'Chiel92/vim-autoformat'
 Bundle 'Lokaltog/vim-distinguished'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'Shutnik/jshint2.vim'
@@ -29,9 +29,9 @@ Bundle 'Syntastic'
 Bundle 'The-NERD-tree'
 Bundle 'abolish.vim'
 Bundle 'bling/vim-airline'
-Bundle 'ctrlp.vim'
+"Bundle 'ctrlp.vim'
 Bundle 'cwoac/nvim'
-Bundle 'dxw/vim-php-indent'
+"Bundle 'dxw/vim-php-indent'
 Bundle 'einars/js-beautify'
 Bundle 'elzr/vim-json'
 Bundle 'flazz/vim-colorschemes'
@@ -43,7 +43,7 @@ Bundle 'lukaszkorecki/workflowish'
 Bundle 'markwu/vim-laravel4-snippets'
 Bundle 'matchit.zip'
 Bundle 'mattn/emmet-vim'
-Bundle 'mru.vim'
+Bundle 'Shougo/neomru.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'skammer/vim-css-color'
@@ -54,6 +54,16 @@ Bundle 'vim-scripts/vim-auto-save'
 Bundle 'xolox/vim-colorscheme-switcher'
 Bundle 'xolox/vim-misc'
 Bundle 'xsbeats/vim-blade'
+Bundle 'Blackrush/vim-gocode'
+Bundle 'Shougo/neocomplcache.vim'
+Bundle 'spf13/PIV'
+Bundle 'majutsushi/tagbar'
+Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/vimproc.vim'
+Bundle 'jcf/vim-latex'
+Bundle 'xuhdev/vim-latex-live-preview'
+Bundle 'simplenote.vim'
+
 
 "Bundle 'vim-scripts/YankRing.vim'
 
@@ -61,16 +71,16 @@ Bundle 'xsbeats/vim-blade'
 " Bundle 'file:///Users/gmarik/path/to/plugin'
 " ...
 
-noremap <c-l> :Autoformat<CR><CR>
- 
+noremap <c-l> :TagbarToggle<CR>
+
 " makes it so I can match tags with % sign
-:runtime macros/matchit.vim 
- 
+:runtime macros/matchit.vim
+
 :let g:sparkupNextMapping=',N'
+set background=dark
+set t_Co=256 | colorscheme ir_black
 
-colo 256-grayvim
-
-filetype plugin indent on     
+filetype plugin indent on
  "required!
  "
  " Brief help
@@ -90,7 +100,7 @@ runtime ftplugin/man.vim
 
 set ruler " puts a bar on the bottom with info
 
-set laststatus=1 
+set laststatus=1
 
 "the next three are commands that add firefox
 "like keybindings for tabs
@@ -101,20 +111,17 @@ nmap <C-S-tab> :tabprevious<cr>
 "nmap <C-t> :tabnew<cr>
 nmap <C-tab> :tabnext<cr>
 
-nmap <C-t> :tabnew
+nmap <C-t> :tabnew<cr>
 
-" Makes Ctrl+Space auto complete commands 
+" Makes Ctrl+Space auto complete commands
 imap <C-space> <C-X><C-O><C-P>
-"Makes it so you can use jj to ESC if you can't set 
+"Makes it so you can use jj to ESC if you can't set
 "Caps-lock to esc
-imap jj <Esc>
+imap jk <Esc>
 "Makes shift+insert paste like it normaly does in
 "many linux applications
 imap <S-Insert> <Esc>"+p
 nmap <S-Insert> "+p
-
-"sorry I forgot what this does =p
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "adds a new command that edits your vimrc via :Vimrc
 com! Vimrc :e ~/Vimrc/.vimrc
@@ -127,7 +134,6 @@ map ,w :w<cr>
 map ,i ,S:BundleInstall<cr>
 map ,c ,S:BundleClean<cr>
 
-
 "I always make the typo of typing :W
 "This is my lazy way of not fixing
 "old habbits
@@ -137,32 +143,20 @@ com! W :w
 " then this opens that with f2
 " (really useful)
 nmap <C-n> ;NERDTreeToggle<CR>
-" This opens MRU which is a plugin
-" for showing most recent files edited
-" nmap <F3> :MRU<CR>
-
-
 
 " makes scrolling faster with CTRL
 
 nmap <C-j> jjjjj
 nmap <C-k> kkkkk
 
-
-" moves windows to windows using keypad 
- nmap <Left> <C-w>h 
- nmap <Right> <C-w>l 
- nmap <Up> <C-w>k 
- nmap <Down> <C-w>j 
-
 " This sets the CD to the current file, pretty nice
 " actualy but I like a little more control
-" set autochdir	  
+" set autochdir
 
 " helps things to indent properly
 set smartindent
-set tabstop=4
-set shiftwidth=4
+set tabstop=3
+set shiftwidth=3
 set expandtab
 
 " Highlights the current line, which is nice but somtimes
@@ -195,7 +189,7 @@ nmap <silent> ^ :setl hls<CR>:let @/="<C-r><C-w>"<CR>
 " Set's it so that there's 3 lines of padding between the cursor and the
 " top/bottom of the screen
 set scrolloff=3
-" set vb t_vb=".  
+" set vb t_vb=".
 
 "makes it so that jquery scripts have jquery syntax highlighting
 au BufRead,BufNewFile *.js set ft=javascript.jquery
@@ -209,7 +203,7 @@ au BufRead,BufNewFile *.wofl call workflowish#convert_from_workflowy()
 " au FileType php silent normal gg=G
    " --- This Turns cursor collmons on and off when you lave a buffer
 " au WinLeave * set nocursorline nocursorcolumn
-" au WinEnter * set cursorline 
+" au WinEnter * set cursorline
 
 
 "this makes a line on the right showing where
@@ -259,11 +253,11 @@ endfunction
 "END OR BETTER LOOKING FOLD
 
 
-:nmap <space> <C-W><C-W>
-:nmap <s-space> <C-W>p
+nnoremap <space> <C-W><C-W>
+nnoremap <s-space> <C-W>p
 :set nowrap
 
-:nmap ,r :!php %<cr>
+":nmap ,r :!php %<cr>
 
 :let mapleader = ","
 
@@ -287,7 +281,7 @@ nnoremap ; :
 map j gj
 map k gk
 
-" this makes it so that when you have {|} and push enter 
+" this makes it so that when you have {|} and push enter
 " it expands nicely
 inoremap {<cr> {<cr>}<c-o><s-o>
 inoremap [<cr> [<cr>]<c-o><s-o>
@@ -344,19 +338,44 @@ com! TrailingSpaceKiller :%s/\s\+$//
 :syntax on
 
 " normal copy/paste
-vmap <C-c> y<Esc>i
+vmap <C-c> "+y<Esc>i
 vmap <C-x> d<Esc>i
-imap <C-v> <Esc>pi
+imap <C-V> <c-o>"+p
 imap <C-y> <Esc>ddi
 map <C-z> <Esc>
 imap <C-z> <Esc>ui
 
-com! R !clear;echo "-----------[ errors ]-----------"; g++ %; echo""; echo "-----------[ a.out ]-----------";./a.out
-map ,r :R<cr>
 
 imap <c-s> <c-o>:w<cr>
 
-
-
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
+
+augroup AutoReloadVimRC
+   au!
+   " automatically reload vimrc when it's saved
+   au BufWritePost .vimrc so %
+augroup END
+
+"Run for many different thigns
+au BufRead,BufNewFile *.go :nmap ,r :!clear; go run %<cr>
+au BufRead,BufNewFile *.go :setlocal tabstop=4<cr>
+au BufRead,BufNewFile *.go :setlocal noexpandtab<cr>
+au BufRead,BufNewFile *.php :nmap ,r :!clear; php %<cr>
+au BufRead,BufNewFile *.rb :nmap ,r :!clear; ruby %<cr>
+au BufRead,BufNewFile *.cpp :nmap ,r :!clear;echo "-----------[ errors ]-----------"; g++ -g %; echo ""; echo "-----------[ a.out ]-----------";./a.out;echo ""<cr>
+au BufRead,BufNewFile *.js :nmap ,r :!clear;node %<cr>
+au BufRead,BufNewFile *.java :nmap ,r :!clear;echo "-----------[ errors ]-----------"; javac %;<cr>
+
+"----Unite stuff----
+nnoremap <Leader>f :Unite grep:.<cr>
+nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 file_mru<cr>kA
+noremap <Leader>b :Unite -buffer-name=buffers -winheight=10 buffer<cr>kA
+" CtrlP search
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#source('file_rec/async','sorters','sorter_rank')
+" replacing unite with ctrl-p
+"nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
+nnoremap <C-p> :Unite file_rec/async<cr>kA
+
