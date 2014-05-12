@@ -4,65 +4,85 @@
 " This makes sure that it doesn't defalt to all the crappy vi stuff rather
 " than use all the new vim stuff
 
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-sensible'
+Plug 'junegunn/seoul256.vim'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Shougo/unite.vim'
+Plug 'mattn/emmet-vim'
+Plug 'surround.vim'
+Plug 'Blackrush/vim-gocode'
+Plug 'Syntastic'
+Plug 'SirVer/ultisnips'
+Plug 'Shougo/neomru.vim'
+Plug 'stephpy/vim-php-cs-fixer'
+Plug 'vimwiki/vimwiki'
+Plug 'jcf/vim-latex'
+Plug 'tComment'
+Plug 'Shougo/vimproc.vim'
+Plug 'marijnh/tern_for_vim'
+Plug 'kchmck/vim-coffee-script'
+Plug 'majutsushi/tagbar', { 'on' : 'TagbarToggle' }
+Plug 'dag/vim2hs'
+Plug 'godlygeek/tabular'
+
+call plug#end()
+
 ""======== VUNDLES mannagement ===================
-set nocompatible               " be iMproved
-filetype off                   " required!
-
-
- set rtp+=~/.vim/bundle/vundle/
- call vundle#rc()
-
+"set nocompatible               " be iMproved
+"filetype off                   " required!
+"
+"
+" set rtp+=~/.vim/bundle/vundle/
+" call vundle#rc()
+"
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+"Bundle 'gmarik/vundle'
 
 " My Bundles here:--------------------------
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'jQuery'
 "Bundle 'terryma/vim-multiple-cursors'
 "Bundle 'Chiel92/vim-autoformat'
-Bundle 'Lokaltog/vim-distinguished'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'Shutnik/jshint2.vim'
-Bundle 'SirVer/ultisnips'
-Bundle 'Syntastic'
-Bundle 'The-NERD-tree'
-Bundle 'abolish.vim'
-Bundle 'bling/vim-airline'
-"Bundle 'ctrlp.vim'
-Bundle 'cwoac/nvim'
-"Bundle 'dxw/vim-php-indent'
-Bundle 'einars/js-beautify'
-Bundle 'elzr/vim-json'
-Bundle 'flazz/vim-colorschemes'
-Bundle 'goatslacker/mango.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'groenewege/vim-less'
-Bundle 'joonty/vim-sauce.git'
-Bundle 'lukaszkorecki/workflowish'
-Bundle 'markwu/vim-laravel4-snippets'
-Bundle 'matchit.zip'
-Bundle 'mattn/emmet-vim'
-Bundle 'Shougo/neomru.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'skammer/vim-css-color'
-Bundle 'surround.vim'
-Bundle 'tComment'
-Bundle 'tpope/vim-fugitive'
-Bundle 'vim-scripts/vim-auto-save'
-Bundle 'xolox/vim-colorscheme-switcher'
-Bundle 'xolox/vim-misc'
-Bundle 'xsbeats/vim-blade'
-Bundle 'Blackrush/vim-gocode'
-Bundle 'Shougo/neocomplcache.vim'
-Bundle 'spf13/PIV'
-Bundle 'majutsushi/tagbar'
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/vimproc.vim'
-Bundle 'jcf/vim-latex'
-Bundle 'xuhdev/vim-latex-live-preview'
-Bundle 'simplenote.vim'
+" Bundle 'Lokaltog/vim-distinguished'
+" Bundle 'MarcWeber/vim-addon-mw-utils'
+" Bundle 'Shutnik/jshint2.vim'
+" Bundle 'SirVer/ultisnips'
+" Bundle 'Syntastic'
+" Bundle 'The-NERD-tree'
+" Bundle 'abolish.vim'
+" Bundle 'bling/vim-airline'
+" Bundle 'cwoac/nvim'
+" "Bundle 'dxw/vim-php-indent'
+" Bundle 'einars/js-beautify'
+" Bundle 'elzr/vim-json'
+" Bundle 'flazz/vim-colorschemes'
+" Bundle 'goatslacker/mango.vim'
+" Bundle 'godlygeek/tabular'
+" Bundle 'groenewege/vim-less'
+" Bundle 'joonty/vim-sauce.git'
+" Bundle 'lukaszkorecki/workflowish'
+" Bundle 'markwu/vim-laravel4-snippets'
+" Bundle 'matchit.zip'
+" Bundle 'mattn/emmet-vim'
+" Bundle 'Shougo/neomru.vim'
+" Bundle 'pangloss/vim-javascript'
+" Bundle 'plasticboy/vim-markdown'
+" Bundle 'skammer/vim-css-color'
+" Bundle 'surround.vim'
+" Bundle 'tpope/vim-fugitive'
+" Bundle 'vim-scripts/vim-auto-save'
+" Bundle 'xolox/vim-colorscheme-switcher'
+" Bundle 'xolox/vim-misc'
+" Bundle 'xsbeats/vim-blade'
+" Bundle 'Shougo/neocomplcache.vim'
+" Bundle 'spf13/PIV'
+" Bundle 'majutsushi/tagbar'
+" Bundle 'Shougo/unite.vim'
+" Bundle 'jcf/vim-latex'
+" Bundle 'xuhdev/vim-latex-live-preview'
+" Bundle 'simplenote.vim'
 
 
 "Bundle 'vim-scripts/YankRing.vim'
@@ -76,25 +96,11 @@ noremap <c-l> :TagbarToggle<CR>
 " makes it so I can match tags with % sign
 :runtime macros/matchit.vim
 
-:let g:sparkupNextMapping=',N'
+:let g:sparkupNextMapping=',n'
 set background=dark
-set t_Co=256 | colorscheme ir_black
+set t_Co=256 | colorscheme seoul256
 
 filetype plugin indent on
- "required!
- "
- " Brief help
- " :BundleList          - list configured bundles
- " :BundleInstall(!)    - install(update) bundles
- " :BundleSearch(!) foo - search(or refresh cache first) for foo
- " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
- "
- " see :h vundle for more details or wiki for FAQ
- " NOTE: comments after Bundle command are not allowed.
-
-
- "========== end of vundle mannagement ===========
-
 
 runtime ftplugin/man.vim
 
@@ -117,6 +123,7 @@ nmap <C-t> :tabnew<cr>
 imap <C-space> <C-X><C-O><C-P>
 "Makes it so you can use jj to ESC if you can't set
 "Caps-lock to esc
+" Also says 'just kidding'
 imap jk <Esc>
 "Makes shift+insert paste like it normaly does in
 "many linux applications
@@ -283,6 +290,7 @@ map k gk
 
 " this makes it so that when you have {|} and push enter
 " it expands nicely
+" Best mapping EVER
 inoremap {<cr> {<cr>}<c-o><s-o>
 inoremap [<cr> [<cr>]<c-o><s-o>
 inoremap (<cr> (<cr>)<c-o><s-o>
@@ -358,19 +366,21 @@ augroup AutoReloadVimRC
 augroup END
 
 "Run for many different thigns
+au BufRead,BufNewFile *.html :nmap ,r :!chromium %<cr>
 au BufRead,BufNewFile *.go :nmap ,r :!clear; go run %<cr>
-au BufRead,BufNewFile *.go :setlocal tabstop=4<cr>
-au BufRead,BufNewFile *.go :setlocal noexpandtab<cr>
+au BufRead,BufNewFile *.go setlocal noexpandtab
+au BufRead,BufNewFile *.go setlocal tabstop=4
 au BufRead,BufNewFile *.php :nmap ,r :!clear; php %<cr>
 au BufRead,BufNewFile *.rb :nmap ,r :!clear; ruby %<cr>
-au BufRead,BufNewFile *.cpp :nmap ,r :!clear;echo "-----------[ errors ]-----------"; g++ -g %; echo ""; echo "-----------[ a.out ]-----------";./a.out;echo ""<cr>
+au BufRead,BufNewFile *.cpp :nmap ,r :!clear;echo "-----------[ error? ]-----------"; g++ -g % && echo "" && echo "-----------[ a.out ]-----------" && ./a.out && echo ""<cr>
 au BufRead,BufNewFile *.js :nmap ,r :!clear;node %<cr>
-au BufRead,BufNewFile *.java :nmap ,r :!clear;echo "-----------[ errors ]-----------"; javac %;<cr>
+au BufRead,BufNewFile *.java :nmap ,c :!clear;echo "-----------[ errors ]-----------"; javac %;<cr>
+au BufRead,BufNewFile *.java :nmap ,r :!clear;echo "-----------[ errors ]-----------"; java %<backspace><backspace><backspace><cr>
 
 "----Unite stuff----
 nnoremap <Leader>f :Unite grep:.<cr>
 nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 file_mru<cr>kA
-noremap <Leader>b :Unite -buffer-name=buffers -winheight=10 buffer<cr>kA
+noremap <Leader>b :Unite -buffer-name=buffers -winBundleheight=10 buffer<cr>kA
 " CtrlP search
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
@@ -379,3 +389,7 @@ call unite#custom#source('file_rec/async','sorters','sorter_rank')
 "nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
 nnoremap <C-p> :Unite file_rec/async<cr>kA
 
+map <Leader>w :VimwikiIndex<cr>
+
+autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
