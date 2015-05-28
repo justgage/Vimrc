@@ -1,3 +1,7 @@
+"for fish shell
+if $SHELL =~ 'fish'
+   set shell='/bin/zsh'
+endif
 " x-------------------------------------x
 " | GAGES VIMRC                         |
 " x-------------------------------------x
@@ -12,7 +16,7 @@ call plug#begin('~/.vim/plugged')
 " -----------
 "Go
 Plug 'fatih/vim-go', { 'for' : 'go' }
-let g:go_fmt_command = "goimports"
+"let g:go_fmt_command = 'goimports'
 
 " Less
 Plug 'groenewege/vim-less', { 'for' : 'less' }
@@ -97,11 +101,13 @@ Plug 'xolox/vim-lua-inspect'
 Plug 'xolox/vim-misc'
 
 "OCaml
-Plug 'def-lkb/merlin', { 'for' : 'ocaml' }
-
+"Plug 'def-lkb/merlin', { 'for' : 'ocaml' }
+" Merlin
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
 Plug 'jpalardy/vim-slime', { 'for' : 'ocaml' }
-
 Plug 'OCamlPro/ocp-indent', { 'for' : 'ocaml' }
+
 
 "Elixir
 Plug 'elixir-lang/vim-elixir'
@@ -111,8 +117,12 @@ let g:syntastic_enable_elixir_checker = 1
 
 "Clojure
 Plug 'tpope/vim-fireplace'
+Plug 'vim-scripts/paredit.vim'
+autocmd BufRead,BufNewFile *.edn set filetype=clojure
+
 
 Plug 'terryma/vim-multiple-cursors'
+
 
 "mappings for multiple cursors
 let g:multi_cursor_use_default_mapping=0
@@ -125,6 +135,12 @@ let g:multi_cursor_quit_key='<Esc>'
 " Vim
 " anything to extend vim's funcitonality
 " ---------------------------------------
+
+
+Plug 'tpope/vim-sleuth'
+
+
+Plug 'dag/vim-fish'
 
 "Plug 'maxbrunsfeld/vim-yankstack'
 "Plug 'Shougo/neocomplete.vim'
@@ -154,7 +170,9 @@ Plug 'jceb/vim-orgmode', { 'for' : 'org' }
 " Themes
 Plug 'junegunn/seoul256.vim'
 Plug 'tomasr/molokai'
+Plug 'justgage/mustang-vim'
 Plug 'vim-scripts/xoria256.vim'
+Plug 'endel/vim-github-colorscheme'
 
 " -----------
 " Apps
@@ -237,10 +255,14 @@ set ruler " puts a bar on the bottom with info
 nmap > >>
 nmap < <<
 
+" No timeouts for my slow fingers
+set notimeout 
+set ttimeout
+
 
 set background=dark
 
-set t_Co=256 | colorscheme molokai
+set t_Co=256 | colorscheme mustang
 
 set laststatus=1
 
@@ -264,7 +286,7 @@ autocmd GUIEnter * set visualbell t_vb=
 
 " be even faster!
 inoremap jj <Esc>:w<CR>
-inoremap ;; <End>;<Esc>:w<CR>
+"inoremap ;; <End>;<Esc>:w<CR>
 nnoremap ; :
 
 "This makes moving around in wrapped lines better
@@ -366,7 +388,7 @@ set listchars=eol:¶,tab:>-,trail:•,extends:>,precedes:<
 "manually change the current directory to the current file an print it out.
 nnoremap ,cd :cd %:p:h<CR>:pwd<CR>
 
-noremap K k
+"noremap K k
 
 " map these keys to easy motion commands
 map <leader>f <leader><leader>f
@@ -404,17 +426,20 @@ au BufRead,BufNewFile *.pl    :nmap ,r :!clear; swipl %<cr>
 au BufRead,BufNewFile *.erl   :nmap ,r :!clear; erlc %<cr>
 au BufRead,BufNewFile *.rb    :nmap ,r :!clear; ruby %<cr>
 au BufRead,BufNewFile *.cpp   :nmap ,r :!clear;echo "-----------[ error? ]-----------"; g++ -g % && echo "" && echo "-----------[ a.out ]-----------" && ./a.out && echo ""<cr>
+au BufRead,BufNewFile *.cpp   :nmap ,d :!clear;gdb a.out<cr>
+au BufRead,BufNewFile *.ml   :nmap ,r :!clear; ocaml %<cr>
+" au BufRead,BufNewFile *.ml   :nmap ,r :!clear;echo "-----------[ error? ]-----------"; ocamlc % && echo "" && echo "-----------[ a.out ]-----------" && ./a.out && echo ""<cr>
 au BufRead,BufNewFile *.js    :nmap ,r :!clear;node %<cr>
 au BufRead,BufNewFile *.java  :nmap ,c :!clear;echo "-----------[ errors ]-----------"; javac %;<cr>
 au BufRead,BufNewFile *.scala :nmap ,c :!clear;echo "-----------[ errors ]-----------"; scalac %;<cr>
 au BufRead,BufNewFile *.hs    :nmap ,r :!clear;ghci -i %<cr>
 au BufRead,BufNewFile *.ex    :nmap ,r :!clear;elixir %<cr>
+au BufRead,BufNewFile *.py    :nmap ,r :!clear;python %<cr>
+au BufRead,BufNewFile *.el    :nmap ,r :!clear;emacs --script %
+
+:nmap ,m :!make<cr>
 
 
-"for fish shell
-if $SHELL =~ 'fish'
-   set shell='/bin/zsh'
-endif
 
 " NOTE: installed via pacman
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -431,5 +456,16 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#source('file_rec/async','sorters','sorter_rank')
 " replacing unite with ctrl-p
-"nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
-nnoremap <C-p> :Unite file_rec/async<cr>kA
+nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
+" nnoremap <C-p> :Unite file_rec/async<cr>
+
+nmap <tab> ==
+
+au BufRead,BufNewFile *.txt,*.tex,*.md set wrap linebreak nolist textwidth=0 wrapmargin=0
+
+
+" ocaml indent
+execute ":source " . "/home/justgage/.opam/4.02.1/share/vim/syntax/ocp-indent.vim"
+
+
+
