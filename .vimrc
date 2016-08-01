@@ -18,6 +18,32 @@ call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go', { 'for' : 'go' }
 "let g:go_fmt_command = 'goimports'
 
+Plug 'Shougo/deoplete.nvim'
+let g:deoplete#enable_at_startup = 1
+
+Plug 'zchee/deoplete-go'
+Plug 'garyburd/go-explorer'
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+let g:go_term_mode = "split"
+
+" Make it faster
+let g:go_highlight_structs = 0
+let g:go_highlight_interfaces = 0
+let g:go_highlight_operators = 0
+
+
+" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+
+" bad!
+"let g:rustfmt_autosave = 1
+
+
 " Less
 Plug 'groenewege/vim-less', { 'for' : 'less' }
 
@@ -42,17 +68,22 @@ Plug 'bitfyre/vim-indent-html'
 " JavaScript
 Plug 'pangloss/vim-javascript'
 Plug 'lukaszb/vim-web-indent'
+Plug 'Chiel92/vim-autoformat'
+
+" Mustash
+Plug 'juvenn/mustache.vim'
 
 " JavaScript related ones
 Plug 'claco/jasmine.vim'
 Plug 'digitaltoad/vim-jade'
 Plug 'jcf/vim-latex'
 Plug 'wavded/vim-stylus', { 'for' : 'stylus' }
-Plug 'marijnh/tern_for_vim'
+"Plug 'marijnh/tern_for_vim'
 
 " JSX support for react.js
 Plug 'mxw/vim-jsx'
-Plug 'jsx/jsx.vim'
+"Plug 'jsx/jsx.vim'
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " Coffee script
 Plug 'kchmck/vim-coffee-script', { 'for' : 'coffee' }
@@ -69,6 +100,7 @@ augroup END
 "Haskell
 Plug 'vim-scripts/Superior-Haskell-Interaction-Mode-SHIM', { 'for' : 'haskell' }
 Plug 'dag/vim2hs'
+Plug 'pbrisbin/vim-syntax-shakespeare'
 
 "Io
 Plug 'andreimaxim/vim-io', { 'for' : 'io' }
@@ -97,11 +129,11 @@ Plug 'khorser/vim-mercury', { 'for' : 'mercury' }
 Plug 'vim-scripts/mercury.vim', { 'for' : 'mercury' }
 
 "Lua
-Plug 'xolox/vim-lua-inspect'
+"Plug 'xolox/vim-lua-inspect'
 Plug 'xolox/vim-misc'
 
 "OCaml
-"Plug 'def-lkb/merlin', { 'for' : 'ocaml' }
+Plug 'def-lkb/merlin', { 'for' : 'ocaml' }
 " Merlin
 let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
@@ -115,11 +147,34 @@ Plug 'elixir-lang/vim-elixir'
 " Syntastic enable elixir
 let g:syntastic_enable_elixir_checker = 1
 
+
 "Clojure
 Plug 'tpope/vim-fireplace'
-Plug 'vim-scripts/paredit.vim'
+"Plug 'vim-scripts/paredit.vim'
+Plug 'snoe/nvim-parinfer.js' " reeally cool!
+Plug 'guns/vim-clojure-static'
 autocmd BufRead,BufNewFile *.edn set filetype=clojure
 
+Plug 'elmcast/elm-vim'
+let g:elm_jump_to_error = 1
+let g:elm_make_output_file = "elm.js"
+let g:elm_make_show_warnings = 1
+let g:elm_browser_command = "chromium"
+let g:elm_detailed_complete = 1
+let g:elm_format_autosave = 1
+
+let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+
+let g:elm_syntastic_show_warnings = 1
+
+au FileType elm nmap <leader>b <Plug>(elm-make)
+au FileType elm nmap <leader>m <Plug>(elm-make-main)
+au FileType elm nmap <leader>t <Plug>(elm-test)
+au FileType elm nmap <leader>r <Plug>(elm-repl)
+au FileType elm nmap <leader>e <Plug>(elm-error-detail)
+au FileType elm nmap <leader>d <Plug>(elm-show-docs)
+au FileType elm nmap <leader>w <Plug>(elm-browse-docs)
 
 Plug 'terryma/vim-multiple-cursors'
 
@@ -132,21 +187,36 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 " ---------------------------------------
-" Vim
+" VIM
 " anything to extend vim's funcitonality
 " ---------------------------------------
+"
 
+Plug 'neovim/node-host'
+
+Plug 'KabbAmine/zeavim.vim'
+
+Plug 'rking/ag.vim'
+
+Plug 'justinmk/vim-sneak'
 
 Plug 'tpope/vim-sleuth'
 
 
-Plug 'dag/vim-fish'
+" Plug 'dag/vim-fish'
 
 "Plug 'maxbrunsfeld/vim-yankstack'
 "Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/unite.vim'
-
+" Plug 'thoughtbot/pick.vim' 
+" nnoremap <C-p> :call PickFile()<CR>
+" nnoremap <Leader>p :call PickFile()<CR>
+" nnoremap <Leader>s :call PickFileSplit()<CR>
+" nnoremap <Leader>v :call PickFileVerticalSplit()<CR>
+" nnoremap <Leader>t :call PickFileTab()<CR>
+" nnoremap <Leader>b :call PickBuffer()<CR>
+" nnoremap <Leader>] :call PickTag()<CR>
 
 Plug 'Shougo/vimproc.vim'
 Plug 'SirVer/ultisnips'
@@ -161,8 +231,16 @@ Plug 'Syntastic'
 Plug 'godlygeek/tabular'
 Plug 'ivalkeen/nerdtree-execute'
 Plug 'surround.vim'
+" some mapings for surrounding in visual mode
+vmap " S"gv
+vmap ( S(gv
+vmap { S(gv
+
+vmap > >gv
+vmap < <gv
+
 Plug 'tComment'
-Plug 'tpope/vim-sensible'
+" Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-abolish'
 Plug 'jceb/vim-orgmode', { 'for' : 'org' }
@@ -173,6 +251,7 @@ Plug 'tomasr/molokai'
 Plug 'justgage/mustang-vim'
 Plug 'vim-scripts/xoria256.vim'
 Plug 'endel/vim-github-colorscheme'
+Plug 'freeo/vim-kalisi'
 
 " -----------
 " Apps
@@ -184,8 +263,8 @@ Plug 'justgage/tagbar', { 'on' : 'TagbarToggle' }
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/Gundo'
 Plug 'vim-scripts/LanguageTool'
-Plug 'farseer90718/vim-taskwarrior'
-Plug 'ervandew/supertab'
+"Plug 'farseer90718/vim-taskwarrior'
+"Plug 'ervandew/supertab'
 
 call plug#end()
 
@@ -193,6 +272,10 @@ call plug#end()
 " --------------------------
 " Essential Vimrc settings:
 " -------------------------
+
+nmap <c-k> ddkP
+nmap <c-j> ddjP
+
 
 set hidden
 
@@ -261,8 +344,7 @@ set ttimeout
 
 
 set background=dark
-
-set t_Co=256 | colorscheme mustang
+set t_Co=256 | colorscheme kalisi
 
 set laststatus=1
 
@@ -274,7 +356,7 @@ nnoremap <s-space> <C-W>p
 
 set nowrap
 
-set foldmethod=syntax
+"set foldmethod=syntax
 "
 " show lines around cursor
 set scrolloff=3
@@ -286,8 +368,9 @@ autocmd GUIEnter * set visualbell t_vb=
 
 " be even faster!
 inoremap jj <Esc>:w<CR>
-"inoremap ;; <End>;<Esc>:w<CR>
-nnoremap ; :
+inoremap jk <Esc>:w<CR>
+
+"nnoremap ; : " this is perhaps a little dangerous but I'm trying it
 
 "This makes moving around in wrapped lines better
 map j gj
@@ -300,7 +383,7 @@ inoremap {<cr> {<cr>}<c-o><s-o>
 inoremap [<cr> [<cr>]<c-o><s-o>
 inoremap (<cr> (<cr>)<c-o><s-o>
 
-inoremap ;w<cr> <esc>:w<cr>
+"inoremap ;w<cr> <esc>:w<cr>
 inoremap :w<cr> <esc>:w<cr>
 
 " END  ----
@@ -327,7 +410,7 @@ map ,u ,S:UltiSnipsEdit<cr>
 " If you have the NERDtree plugin installed
 " then this opens that with f2
 " (really useful)
-nmap <C-n> ;NERDTreeToggle<CR>
+nmap <C-n> :NERDTreeToggle<CR>
 
 
 "This Highlights the word under the cursor
@@ -379,7 +462,7 @@ com! ReloadSnippets :call ReloadAllSnippets()
 
 " See invisible characters
 "set list
-set listchars=eol:Â¶,tab:>-,trail:â€¢,extends:>,precedes:<
+set listchars=eol:¶,tab:>-,trail:¢,extends:>,precedes:<
 
 
 "auto change current directory to the current file
@@ -398,13 +481,13 @@ com! TrailingSpaceKiller :%s/\s\+$//
 
 
 " normal copy/paste
-vmap <C-c> "+y
-vmap <C-x> "+c
-vmap <C-v> c<ESC>"+p
+vnoremap <C-c> "+y
+vnoremap <C-x> "+c
+vnoremap <C-v> c<ESC>"+p
 imap <C-v> <C-r><C-o>+
 
-imap <S-Insert> <Esc>"+p
-nmap <S-Insert> "+p
+inoremap <S-Insert> <Esc>"+p
+nnoremap <S-Insert> "+p
 
 imap <c-s> <c-o>:w<cr>
 
@@ -416,56 +499,58 @@ augroup AutoReloadVimRC
 augroup END
 
 "Run for many different thigns
-au BufRead,BufNewFile *.html  :nmap ,r :!chromium %<cr>
-au BufRead,BufNewFile *.go    :nmap ,r :!clear; go run %<cr>
-au BufRead,BufNewFile *.go    :setlocal noexpandtab
-au BufRead,BufNewFile *.go    :setlocal tabstop=4
-au BufRead,BufNewFile *.php   :nmap ,r :!clear; php %<cr>
-au BufRead,BufNewFile *.io    :nmap ,r :!clear; io %<cr>
-au BufRead,BufNewFile *.pl    :nmap ,r :!clear; swipl %<cr>
-au BufRead,BufNewFile *.erl   :nmap ,r :!clear; erlc %<cr>
-au BufRead,BufNewFile *.rb    :nmap ,r :!clear; ruby %<cr>
-au BufRead,BufNewFile *.cpp   :nmap ,r :!clear;echo "-----------[ error? ]-----------"; g++ -g % && echo "" && echo "-----------[ a.out ]-----------" && ./a.out && echo ""<cr>
-au BufRead,BufNewFile *.cpp   :nmap ,d :!clear;gdb a.out<cr>
-au BufRead,BufNewFile *.ml   :nmap ,r :!clear; ocaml %<cr>
-" au BufRead,BufNewFile *.ml   :nmap ,r :!clear;echo "-----------[ error? ]-----------"; ocamlc % && echo "" && echo "-----------[ a.out ]-----------" && ./a.out && echo ""<cr>
-au BufRead,BufNewFile *.js    :nmap ,r :!clear;node %<cr>
-au BufRead,BufNewFile *.java  :nmap ,c :!clear;echo "-----------[ errors ]-----------"; javac %;<cr>
-au BufRead,BufNewFile *.scala :nmap ,c :!clear;echo "-----------[ errors ]-----------"; scalac %;<cr>
-au BufRead,BufNewFile *.hs    :nmap ,r :!clear;ghci -i %<cr>
-au BufRead,BufNewFile *.ex    :nmap ,r :!clear;elixir %<cr>
-au BufRead,BufNewFile *.py    :nmap ,r :!clear;python %<cr>
-au BufRead,BufNewFile *.el    :nmap ,r :!clear;emacs --script %
+au BufRead,BufNewFile,BufEnter *.sh    :nmap ,r :!clear; bash %<cr>
+au BufRead,BufNewFile,BufEnter *.html  :nmap ,r :!chromium %<cr>
+au BufRead,BufNewFile,BufEnter *.go    :nmap ,r :!clear; go run %<cr>
+au BufRead,BufNewFile,BufEnter *.go    :setlocal noexpandtab
+au BufRead,BufNewFile,BufEnter *.go    :setlocal tabstop=4
+au BufRead,BufNewFile,BufEnter *.php   :nmap ,r :!clear; php %<cr>
+au BufRead,BufNewFile,BufEnter *.io    :nmap ,r :!clear; io %<cr>
+au BufRead,BufNewFile,BufEnter *.pl    :nmap ,r :!clear; swipl %<cr>
+au BufRead,BufNewFile,BufEnter *.erl   :nmap ,r :!clear; erlc %<cr>
+au BufRead,BufNewFile,BufEnter *.rb    :nmap ,r :!clear; ruby %<cr>
+au BufRead,BufNewFile,BufEnter *.c     :nmap ,r :!clear;echo "-----------[ error? ]-----------"; gcc -g % && echo "" && echo "-----------[ a.out ]-----------" && ./a.out && echo ""<cr>
+au BufRead,BufNewFile,BufEnter *.cpp   :nmap ,r :!clear;echo "-----------[ error? ]-----------"; g++ -g % && echo "" && echo "-----------[ a.out ]-----------" && ./a.out && echo ""<cr>
+au BufRead,BufNewFile,BufEnter *.rs   :nmap ,r :!clear;echo "-----------[ error? ]-----------"; rustc % && echo "" && echo "-----------[ program ]-----------" && ./a.out && echo ""<cr>
+au BufRead,BufNewFile,BufEnter *.cpp   :nmap ,d :!clear;gdb a.out<cr>
+au BufRead,BufNewFile,BufEnter *.ml    :nmap ,r :!clear; ocaml %<cr>
+au BufRead,BufNewFile,BufEnter *.js    :nmap ,r :!clear;node %<cr>
+au BufRead,BufNewFile,BufEnter *.lua    :nmap ,r :!clear;lua5.3 %<cr>
+au BufRead,BufNewFile,BufEnter *.java   :nmap ,r :!clear;echo "-----------[ error? ]-----------"; javac  % && echo "" && echo "-----------[ program ]-----------" && java % && echo ""<cr>
+au BufRead,BufNewFile,BufEnter *.scala :nmap ,c :!clear;echo "-----------[ errors ]-----------"; scalac %;<cr>
+au BufRead,BufNewFile,BufEnter *.hs    :nmap ,r :!clear;ghci -i %<cr>
+au BufRead,BufNewFile,BufEnter *.ex    :nmap ,r :!clear;elixir %<cr>
+au BufRead,BufNewFile,BufEnter *.exs   :nmap ,r :!clear;elixir %<cr>
+au BufRead,BufNewFile,BufEnter *.py    :nmap ,r :!clear;python %<cr>
+au BufRead,BufNewFile,BufEnter *.el    :nmap ,r :!clear;emacs --script %
+au BufRead,BufNewFile,BufEnter *.elm   :nmap ,r :Elm
 
-:nmap ,m :!make<cr>
+nmap ,m :make<cr>
 
 
 
-" NOTE: installed via pacman
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" -- Unite stuff (can't be put above)
-nnoremap <Leader>f :Unite grep:.<cr>
-nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 file_mru<cr>kA
-noremap <Leader>b :Unite -buffer-name=buffers -winBundleheight=10 buffer<cr>kA
-
-" CtrlP search
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#custom#source('file_rec/async','sorters','sorter_rank')
-" replacing unite with ctrl-p
-nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
-" nnoremap <C-p> :Unite file_rec/async<cr>
-
+" Emacs somtimes
 nmap <tab> ==
 
 au BufRead,BufNewFile *.txt,*.tex,*.md set wrap linebreak nolist textwidth=0 wrapmargin=0
 
 
 " ocaml indent
-execute ":source " . "/home/justgage/.opam/4.02.1/share/vim/syntax/ocp-indent.vim"
+"execute ":source " . "/home/justgage/.opam/4.02.1/share/vim/syntax/ocp-indent.vim"
+
+function! StrTrim(txt)
+  return substitute(a:txt, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
+endfunction
+
+
+let g:syntastic_javascript_checkers = ['eslint']
+
+let b:syntastic_javascript_eslint_exec = StrTrim(system('./node_modules/.bin/eslint'))
+
+let g:NERDTreeDirArrows=0
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+:tnoremap <Esc> <C-\><C-n>
 
 
 
